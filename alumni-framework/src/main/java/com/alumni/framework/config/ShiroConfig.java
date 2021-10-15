@@ -336,7 +336,7 @@ public class ShiroConfig
         logoutFilter.setConfig(config);
         logoutFilter.setCentralLogout(true);
         logoutFilter.setLocalLogout(true);
-        logoutFilter.setDefaultUrl(projectUrl + "/callback?client_name=" + clientName);
+        logoutFilter.setDefaultUrl(projectUrl);
         filters.put("logout",logoutFilter);
         shiroFilterFactoryBean.setFilters(filters);
         return shiroFilterFactoryBean;
