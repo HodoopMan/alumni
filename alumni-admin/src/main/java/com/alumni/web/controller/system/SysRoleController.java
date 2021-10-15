@@ -27,7 +27,7 @@ import com.alumni.system.service.ISysUserService;
 
 /**
  * 角色信息
- * 
+ *
  * @author ruoyi
  */
 @Controller
@@ -97,7 +97,6 @@ public class SysRoleController extends BaseController
             return error("新增角色'" + role.getRoleName() + "'失败，角色权限已存在");
         }
         role.setCreateBy(ShiroUtils.getLoginName());
-        ShiroUtils.clearCachedAuthorizationInfo();
         return toAjax(roleService.insertRole(role));
 
     }
@@ -131,7 +130,6 @@ public class SysRoleController extends BaseController
             return error("修改角色'" + role.getRoleName() + "'失败，角色权限已存在");
         }
         role.setUpdateBy(ShiroUtils.getLoginName());
-        ShiroUtils.clearCachedAuthorizationInfo();
         return toAjax(roleService.updateRole(role));
     }
 

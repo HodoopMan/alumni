@@ -24,7 +24,7 @@ import com.alumni.system.service.ISysMenuService;
 
 /**
  * 菜单信息
- * 
+ *
  * @author ruoyi
  */
 @Controller
@@ -70,7 +70,6 @@ public class SysMenuController extends BaseController
         {
             return AjaxResult.warn("菜单已分配,不允许删除");
         }
-        ShiroUtils.clearCachedAuthorizationInfo();
         return toAjax(menuService.deleteMenuById(menuId));
     }
 
@@ -109,7 +108,6 @@ public class SysMenuController extends BaseController
             return error("新增菜单'" + menu.getMenuName() + "'失败，菜单名称已存在");
         }
         menu.setCreateBy(ShiroUtils.getLoginName());
-        ShiroUtils.clearCachedAuthorizationInfo();
         return toAjax(menuService.insertMenu(menu));
     }
 
@@ -137,7 +135,6 @@ public class SysMenuController extends BaseController
             return error("修改菜单'" + menu.getMenuName() + "'失败，菜单名称已存在");
         }
         menu.setUpdateBy(ShiroUtils.getLoginName());
-        ShiroUtils.clearCachedAuthorizationInfo();
         return toAjax(menuService.updateMenu(menu));
     }
 
