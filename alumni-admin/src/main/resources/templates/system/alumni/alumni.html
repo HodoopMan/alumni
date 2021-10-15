@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('【请填写功能名称】列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <label>用户姓名：</label>
+                                <input type="text" name="USERNAME"/>
+                            </li>
+                            <li>
+                                <label>用户账户：</label>
+                                <input type="text" name="ACCOUNT"/>
+                            </li>
+                            <li>
+                                <label>证件号码：</label>
+                                <input type="text" name="idCard"/>
+                            </li>
+                            <li>
+                                <label>用户状态：</label>
+                                <select name="STATUS">
+                                    <option value="">所有</option>
+                                    <option value="-1">代码生成请选择字典属性</option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>手机号码：</label>
+                                <input type="text" name="myPhone"/>
+                            </li>
+                            <li>
+                                <label>电子邮箱：</label>
+                                <input type="text" name="EMAIL"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:alumni:export">
+                    <i class="fa fa-download"></i> 导出
+                </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('system:alumni:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:alumni:remove')}]];
+        var prefix = ctx + "system/alumni";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "【校友数据源】",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'id',
+                    title: '用户ID',
+                    visible: false
+                },
+                {
+                    field: 'username',
+                    title: '用户姓名'
+                },
+                {
+                    field: 'sex',
+                    title: '性别'
+                },
+                {
+                    field: 'birthday',
+                    title: '出生日期'
+                },
+                {
+                    field: 'usertype',
+                    title: '身份类型'
+                },
+                {
+                    field: 'account',
+                    title: '用户账户'
+                },
+                {
+                    field: 'status',
+                    title: '用户状态'
+                },
+
+                {
+                    field: 'idCard',
+                    title: '证件号码'
+                },
+                {
+                    field: 'cardtype',
+                    title: '证件类型'
+                },
+                {
+                    field: 'myPhone',
+                    title: '手机号码'
+                },
+                {
+                    field: 'email',
+                    title: '电子邮箱'
+                },
+                {
+                    field: 'sysntime',
+                    title: '同步时间'
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>
