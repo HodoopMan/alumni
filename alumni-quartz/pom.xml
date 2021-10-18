@@ -34,6 +34,10 @@
             <groupId>com.alumni</groupId>
             <artifactId>alumni-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.alumni</groupId>
+            <artifactId>alumni-system</artifactId>
+        </dependency>
 
     </dependencies>
 
