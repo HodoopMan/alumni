@@ -7,213 +7,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <resultMap type="SysAlumni" id="SysAlumniResult">
         <result property="ID"    column="ID"    />
         <result property="USERNAME"    column="USERNAME"    />
+        <result property="ACCOUNT"    column="ACCOUNT"    />
+        <result property="PASSWORD"    column="PASSWORD"    />
+        <result property="CARDTYPE"    column="CARDTYPE"    />
         <result property="SEX"    column="SEX"    />
-        <result property="PINYIN"    column="PINYIN"    />
         <result property="BIRTHDAY"    column="BIRTHDAY"    />
         <result property="USERTYPE"    column="USERTYPE"    />
-        <result property="ACCOUNT"    column="ACCOUNT"    />
         <result property="STATUS"    column="STATUS"    />
-        <result property="DEPARTMENTNUMBER"    column="DEPARTMENTNUMBER"    />
-        <result property="DEPARTMENTNAME"    column="DEPARTMENTNAME"    />
         <result property="idCard"    column="ID_CARD"    />
-        <result property="myPhone"    column="MY_PHONE"    />
         <result property="EMAIL"    column="EMAIL"    />
-        <result property="activeTime"    column="ACTIVE_TIME"    />
-        <result property="positionName"    column="POSITION_NAME"    />
-        <result property="positionType"    column="POSITION_TYPE"    />
-        <result property="positionLevel"    column="POSITION_LEVEL"    />
-        <result property="positionQc"    column="POSITION_QC"    />
-        <result property="workerLevel"    column="WORKER_LEVEL"    />
-        <result property="positionEngage"    column="POSITION_ENGAGE"    />
-        <result property="studentSource"    column="STUDENT_SOURCE"    />
-        <result property="GRADE"    column="GRADE"    />
-        <result property="schoolLength"    column="SCHOOL_LENGTH"    />
-        <result property="schoolYear"    column="SCHOOL_YEAR"    />
+        <result property="myPhone"    column="MY_PHONE"    />
         <result property="createTime"    column="CREATE_TIME"    />
         <result property="updateTime"    column="UPDATE_TIME"    />
-        <result property="SYSNTIME"    column="SYSNTIME"    />
-        <result property="CZLX"    column="CZLX"    />
-        <result property="extensionNumber"    column="EXTENSION_NUMBER"    />
-        <result property="grapStatus"    column="GRAP_STATUS"    />
-        <result property="grapTime"    column="GRAP_TIME"    />
-        <result property="partyPost"    column="PARTY_POST"    />
-        <result property="USERPHOTO"    column="USERPHOTO"    />
-        <result property="CARDTYPE"    column="CARDTYPE"    />
     </resultMap>
 
     <sql id="selectSysAlumniVo">
-        select ID, USERNAME, SEX, PINYIN, BIRTHDAY, USERTYPE, ACCOUNT, STATUS, DEPARTMENTNUMBER, DEPARTMENTNAME, ID_CARD, MY_PHONE, EMAIL, ACTIVE_TIME, POSITION_NAME, POSITION_TYPE, POSITION_LEVEL, POSITION_QC, WORKER_LEVEL, POSITION_ENGAGE, STUDENT_SOURCE, GRADE, SCHOOL_LENGTH, SCHOOL_YEAR, CREATE_TIME, UPDATE_TIME, SYSNTIME, CZLX, EXTENSION_NUMBER, GRAP_STATUS, GRAP_TIME, PARTY_POST, USERPHOTO, CARDTYPE from portal_user
+        select ID, USERNAME, ACCOUNT, PASSWORD, CARDTYPE, SEX, BIRTHDAY, USERTYPE, STATUS, ID_CARD, EMAIL, MY_PHONE, CREATE_TIME, UPDATE_TIME from account_sysn
     </sql>
 
     <select id="selectSysAlumniList" parameterType="SysAlumni" resultMap="SysAlumniResult">
         <include refid="selectSysAlumniVo"/>
         <where>
             <if test="USERNAME != null  and USERNAME != ''"> and USERNAME like concat('%', #{USERNAME}, '%')</if>
+            <if test="ACCOUNT != null  and ACCOUNT != ''"> and ACCOUNT = #{ACCOUNT}</if>
+            <if test="PASSWORD != null  and PASSWORD != ''"> and PASSWORD = #{PASSWORD}</if>
+            <if test="CARDTYPE != null  and CARDTYPE != ''"> and CARDTYPE = #{CARDTYPE}</if>
             <if test="SEX != null  and SEX != ''"> and SEX = #{SEX}</if>
-            <if test="PINYIN != null  and PINYIN != ''"> and PINYIN = #{PINYIN}</if>
             <if test="BIRTHDAY != null  and BIRTHDAY != ''"> and BIRTHDAY = #{BIRTHDAY}</if>
             <if test="USERTYPE != null  and USERTYPE != ''"> and USERTYPE = #{USERTYPE}</if>
-            <if test="ACCOUNT != null  and ACCOUNT != ''"> and ACCOUNT = #{ACCOUNT}</if>
             <if test="STATUS != null  and STATUS != ''"> and STATUS = #{STATUS}</if>
-            <if test="DEPARTMENTNUMBER != null  and DEPARTMENTNUMBER != ''"> and DEPARTMENTNUMBER = #{DEPARTMENTNUMBER}</if>
-            <if test="DEPARTMENTNAME != null  and DEPARTMENTNAME != ''"> and DEPARTMENTNAME like concat('%', #{DEPARTMENTNAME}, '%')</if>
             <if test="idCard != null  and idCard != ''"> and ID_CARD = #{idCard}</if>
-            <if test="myPhone != null  and myPhone != ''"> and MY_PHONE = #{myPhone}</if>
             <if test="EMAIL != null  and EMAIL != ''"> and EMAIL = #{EMAIL}</if>
-            <if test="activeTime != null "> and ACTIVE_TIME = #{activeTime}</if>
-            <if test="positionName != null  and positionName != ''"> and POSITION_NAME like concat('%', #{positionName}, '%')</if>
-            <if test="positionType != null  and positionType != ''"> and POSITION_TYPE = #{positionType}</if>
-            <if test="positionLevel != null  and positionLevel != ''"> and POSITION_LEVEL = #{positionLevel}</if>
-            <if test="positionQc != null  and positionQc != ''"> and POSITION_QC = #{positionQc}</if>
-            <if test="workerLevel != null  and workerLevel != ''"> and WORKER_LEVEL = #{workerLevel}</if>
-            <if test="positionEngage != null  and positionEngage != ''"> and POSITION_ENGAGE = #{positionEngage}</if>
-            <if test="studentSource != null  and studentSource != ''"> and STUDENT_SOURCE = #{studentSource}</if>
-            <if test="GRADE != null  and GRADE != ''"> and GRADE = #{GRADE}</if>
-            <if test="schoolLength != null  and schoolLength != ''"> and SCHOOL_LENGTH = #{schoolLength}</if>
-            <if test="schoolYear != null  and schoolYear != ''"> and SCHOOL_YEAR = #{schoolYear}</if>
+            <if test="myPhone != null  and myPhone != ''"> and MY_PHONE = #{myPhone}</if>
             <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
             <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
-            <if test="SYSNTIME != null "> and SYSNTIME = #{SYSNTIME}</if>
-            <if test="CZLX != null  and CZLX != ''"> and CZLX = #{CZLX}</if>
-            <if test="extensionNumber != null  and extensionNumber != ''"> and EXTENSION_NUMBER = #{extensionNumber}</if>
-            <if test="grapStatus != null  and grapStatus != ''"> and GRAP_STATUS = #{grapStatus}</if>
-            <if test="grapTime != null "> and GRAP_TIME = #{grapTime}</if>
-            <if test="partyPost != null  and partyPost != ''"> and PARTY_POST = #{partyPost}</if>
-            <if test="USERPHOTO != null  and USERPHOTO != ''"> and USERPHOTO = #{USERPHOTO}</if>
-            <if test="CARDTYPE != null  and CARDTYPE != ''"> and CARDTYPE = #{CARDTYPE}</if>
         </where>
+        order by UPDATE_TIME desc
     </select>
 
     <select id="selectSysAlumniById" parameterType="String" resultMap="SysAlumniResult">
         <include refid="selectSysAlumniVo"/>
         where ID = #{ID}
     </select>
-
-    <insert id="insertSysAlumni" parameterType="SysAlumni">
-        insert into portal_user
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="ID != null">ID,</if>
-            <if test="USERNAME != null">USERNAME,</if>
-            <if test="SEX != null">SEX,</if>
-            <if test="PINYIN != null">PINYIN,</if>
-            <if test="BIRTHDAY != null">BIRTHDAY,</if>
-            <if test="USERTYPE != null">USERTYPE,</if>
-            <if test="ACCOUNT != null">ACCOUNT,</if>
-            <if test="STATUS != null">STATUS,</if>
-            <if test="DEPARTMENTNUMBER != null">DEPARTMENTNUMBER,</if>
-            <if test="DEPARTMENTNAME != null">DEPARTMENTNAME,</if>
-            <if test="idCard != null">ID_CARD,</if>
-            <if test="myPhone != null">MY_PHONE,</if>
-            <if test="EMAIL != null">EMAIL,</if>
-            <if test="activeTime != null">ACTIVE_TIME,</if>
-            <if test="positionName != null">POSITION_NAME,</if>
-            <if test="positionType != null">POSITION_TYPE,</if>
-            <if test="positionLevel != null">POSITION_LEVEL,</if>
-            <if test="positionQc != null">POSITION_QC,</if>
-            <if test="workerLevel != null">WORKER_LEVEL,</if>
-            <if test="positionEngage != null">POSITION_ENGAGE,</if>
-            <if test="studentSource != null">STUDENT_SOURCE,</if>
-            <if test="GRADE != null">GRADE,</if>
-            <if test="schoolLength != null">SCHOOL_LENGTH,</if>
-            <if test="schoolYear != null">SCHOOL_YEAR,</if>
-            <if test="createTime != null">CREATE_TIME,</if>
-            <if test="updateTime != null">UPDATE_TIME,</if>
-            <if test="SYSNTIME != null">SYSNTIME,</if>
-            <if test="CZLX != null">CZLX,</if>
-            <if test="extensionNumber != null">EXTENSION_NUMBER,</if>
-            <if test="grapStatus != null">GRAP_STATUS,</if>
-            <if test="grapTime != null">GRAP_TIME,</if>
-            <if test="partyPost != null">PARTY_POST,</if>
-            <if test="USERPHOTO != null">USERPHOTO,</if>
-            <if test="CARDTYPE != null">CARDTYPE,</if>
-         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="ID != null">#{ID},</if>
-            <if test="USERNAME != null">#{USERNAME},</if>
-            <if test="SEX != null">#{SEX},</if>
-            <if test="PINYIN != null">#{PINYIN},</if>
-            <if test="BIRTHDAY != null">#{BIRTHDAY},</if>
-            <if test="USERTYPE != null">#{USERTYPE},</if>
-            <if test="ACCOUNT != null">#{ACCOUNT},</if>
-            <if test="STATUS != null">#{STATUS},</if>
-            <if test="DEPARTMENTNUMBER != null">#{DEPARTMENTNUMBER},</if>
-            <if test="DEPARTMENTNAME != null">#{DEPARTMENTNAME},</if>
-            <if test="idCard != null">#{idCard},</if>
-            <if test="myPhone != null">#{myPhone},</if>
-            <if test="EMAIL != null">#{EMAIL},</if>
-            <if test="activeTime != null">#{activeTime},</if>
-            <if test="positionName != null">#{positionName},</if>
-            <if test="positionType != null">#{positionType},</if>
-            <if test="positionLevel != null">#{positionLevel},</if>
-            <if test="positionQc != null">#{positionQc},</if>
-            <if test="workerLevel != null">#{workerLevel},</if>
-            <if test="positionEngage != null">#{positionEngage},</if>
-            <if test="studentSource != null">#{studentSource},</if>
-            <if test="GRADE != null">#{GRADE},</if>
-            <if test="schoolLength != null">#{schoolLength},</if>
-            <if test="schoolYear != null">#{schoolYear},</if>
-            <if test="createTime != null">#{createTime},</if>
-            <if test="updateTime != null">#{updateTime},</if>
-            <if test="SYSNTIME != null">#{SYSNTIME},</if>
-            <if test="CZLX != null">#{CZLX},</if>
-            <if test="extensionNumber != null">#{extensionNumber},</if>
-            <if test="grapStatus != null">#{grapStatus},</if>
-            <if test="grapTime != null">#{grapTime},</if>
-            <if test="partyPost != null">#{partyPost},</if>
-            <if test="USERPHOTO != null">#{USERPHOTO},</if>
-            <if test="CARDTYPE != null">#{CARDTYPE},</if>
-         </trim>
-    </insert>
-
-    <update id="updateSysAlumni" parameterType="SysAlumni">
-        update portal_user
-        <trim prefix="SET" suffixOverrides=",">
-            <if test="USERNAME != null">USERNAME = #{USERNAME},</if>
-            <if test="SEX != null">SEX = #{SEX},</if>
-            <if test="PINYIN != null">PINYIN = #{PINYIN},</if>
-            <if test="BIRTHDAY != null">BIRTHDAY = #{BIRTHDAY},</if>
-            <if test="USERTYPE != null">USERTYPE = #{USERTYPE},</if>
-            <if test="ACCOUNT != null">ACCOUNT = #{ACCOUNT},</if>
-            <if test="STATUS != null">STATUS = #{STATUS},</if>
-            <if test="DEPARTMENTNUMBER != null">DEPARTMENTNUMBER = #{DEPARTMENTNUMBER},</if>
-            <if test="DEPARTMENTNAME != null">DEPARTMENTNAME = #{DEPARTMENTNAME},</if>
-            <if test="idCard != null">ID_CARD = #{idCard},</if>
-            <if test="myPhone != null">MY_PHONE = #{myPhone},</if>
-            <if test="EMAIL != null">EMAIL = #{EMAIL},</if>
-            <if test="activeTime != null">ACTIVE_TIME = #{activeTime},</if>
-            <if test="positionName != null">POSITION_NAME = #{positionName},</if>
-            <if test="positionType != null">POSITION_TYPE = #{positionType},</if>
-            <if test="positionLevel != null">POSITION_LEVEL = #{positionLevel},</if>
-            <if test="positionQc != null">POSITION_QC = #{positionQc},</if>
-            <if test="workerLevel != null">WORKER_LEVEL = #{workerLevel},</if>
-            <if test="positionEngage != null">POSITION_ENGAGE = #{positionEngage},</if>
-            <if test="studentSource != null">STUDENT_SOURCE = #{studentSource},</if>
-            <if test="GRADE != null">GRADE = #{GRADE},</if>
-            <if test="schoolLength != null">SCHOOL_LENGTH = #{schoolLength},</if>
-            <if test="schoolYear != null">SCHOOL_YEAR = #{schoolYear},</if>
-            <if test="createTime != null">CREATE_TIME = #{createTime},</if>
-            <if test="updateTime != null">UPDATE_TIME = #{updateTime},</if>
-            <if test="SYSNTIME != null">SYSNTIME = #{SYSNTIME},</if>
-            <if test="CZLX != null">CZLX = #{CZLX},</if>
-            <if test="extensionNumber != null">EXTENSION_NUMBER = #{extensionNumber},</if>
-            <if test="grapStatus != null">GRAP_STATUS = #{grapStatus},</if>
-            <if test="grapTime != null">GRAP_TIME = #{grapTime},</if>
-            <if test="partyPost != null">PARTY_POST = #{partyPost},</if>
-            <if test="USERPHOTO != null">USERPHOTO = #{USERPHOTO},</if>
-            <if test="CARDTYPE != null">CARDTYPE = #{CARDTYPE},</if>
-        </trim>
-        where ID = #{ID}
-    </update>
-
-    <delete id="deleteSysAlumniById" parameterType="String">
-        delete from portal_user where ID = #{ID}
-    </delete>
-
-    <delete id="deleteSysAlumniByIds" parameterType="String">
-        delete from portal_user where ID in
-        <foreach item="ID" collection="array" open="(" separator="," close=")">
-            #{ID}
-        </foreach>
-    </delete>
-
 </mapper>

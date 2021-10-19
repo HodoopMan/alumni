@@ -39,7 +39,7 @@ public class RyTask
     public void ryNoParams()
     {
         SysAlumni alumni=  new SysAlumni();
-        alumni.setUSERTYPE("31");
+        alumni.setSTATUS("1");
         List<SysAlumni> list = sysAlumniService.selectSysAlumniList(alumni);
         List<SysUser> noUserlist = new ArrayList();
         List<SysUser> exUserlist = new ArrayList();
@@ -49,16 +49,17 @@ public class RyTask
             user.setLoginName(loginName);
             String userName=portal.getUSERNAME();
             user.setUserName(userName);
+            String idcard=portal.getIdCard();
+            user.setIdCard(idcard);
             String email=portal.getEMAIL();
             user.setEmail(email);
             String phonenumber=portal.getMyPhone();
             user.setPhonenumber(phonenumber);
             String sex=portal.getSEX();
             user.setSex(sex);
-            String password="1111111111111111111111";
+            String password=portal.getPASSWORD();
             user.setPassword(password);
-            String status=portal.getSTATUS();
-            user.setStatus(status);
+            user.setStatus("0");
             String userType=portal.getUSERTYPE();
             user.setUserType(userType);
             if (UserConstants.USER_NAME_NOT_UNIQUE.equals(userService.checkLoginNameUnique(user.getLoginName())))

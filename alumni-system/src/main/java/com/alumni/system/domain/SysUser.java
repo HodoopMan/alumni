@@ -13,7 +13,7 @@ import com.alumni.common.core.domain.BaseEntity;
 
 /**
  * 用户对象 sys_user
- * 
+ *
  * @author ruoyi
  */
 public class SysUser extends BaseEntity
@@ -45,6 +45,8 @@ public class SysUser extends BaseEntity
     /** 用户类型 */
     private String userType;
 
+    /** 用户类型 */
+    private String idCard;
     /** 用户邮箱 */
     @Excel(name = "用户邮箱")
     private String email;
@@ -124,6 +126,14 @@ public class SysUser extends BaseEntity
     public static boolean isAdmin(Long userId)
     {
         return userId != null && 1L == userId;
+    }
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
     }
 
     public Long getDeptId()
@@ -343,7 +353,7 @@ public class SysUser extends BaseEntity
             .append("deptId", getDeptId())
             .append("loginName", getLoginName())
             .append("userName", getUserName())
-            .append("userType", getUserType())
+            .append("userType", getUserType()).append("idCard", getIdCard())
             .append("email", getEmail())
             .append("phonenumber", getPhonenumber())
             .append("sex", getSex())
