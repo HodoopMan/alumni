@@ -35,14 +35,21 @@
 						<div class="select-list">
 							<ul>
 								<li>
-									登录名称：<input type="text" name="loginName"/>
+									校友姓名：<input type="text" name="loginName"/>
 								</li>
 								<li>
 									手机号码：<input type="text" name="phonenumber"/>
 								</li>
 								<li>
-									用户状态：<select name="status" th:with="type=${@dict.getType('sys_normal_disable')}">
-										<option value="">所有</option>
+									<label>校友类型：</label>
+									<select name="USERTYPE" class="form-control m-b" th:with="type=${@dict.getType('sys_user_type')}">
+										<option value="">全部</option>
+										<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+									</select>
+								</li>
+								<li>
+									校友状态：<select name="status" th:with="type=${@dict.getType('sys_account_status')}">
+										<option value="">全部</option>
 										<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 									</select>
 								</li>
@@ -85,8 +92,10 @@
 	<th:block th:include="include :: ztree-js" />
 	<script th:inline="javascript">
 		var editFlag = [[${@permission.hasPermi('system:user:edit')}]];
-		var removeFlag = [[${@permission.hasPermi('system:user:remove')}]];
+        var user_status = [[${@dict.getType('sys_account_status')}]];
+        var datas = [[${@dict.getType('sys_user_type')}]];
 		var resetPwdFlag = [[${@permission.hasPermi('system:user:resetPwd')}]];
+        var sexs = [[${@dict.getType('sys_user_sex')}]];
 		var prefix = ctx + "system/user";
 
 		$(function() {
@@ -116,17 +125,32 @@
 		        },
 		        {
 		            field: 'loginName',
-		            title: '用户账号',
+		            title: '校友账号',
 		            sortable: true
 		        },
 		        {
 		            field: 'userName',
-		            title: '用户姓名'
+		            title: '校友姓名'
 		        },
+				{
+					field: 'sex',
+					title: '性别',
+					align: 'center',
+					formatter: function(value, row, index) {
+						return $.table.selectDictLabel(sexs, value);
+					}
+				},
 		        {
 		            field: 'idCard',
 		            title: '证件号码'
 		        },
+				{
+					field: 'userType',
+					title: '校友类型',
+					 formatter: function(value, row, index) {
+						 return $.table.selectDictLabel(datas, value);
+					 }
+				},
 		        {
 		            field: 'email',
 		            title: '邮箱',
@@ -137,12 +161,12 @@
 		            title: '手机'
 		        },
 		        {
-		        	visible: editFlag == 'hidden' ? false : true,
-		        	title: '用户状态',
+                    field:"status",
+		        	title: '校友状态',
 		        	align: 'center',
-		        	formatter: function (value, row, index) {
-		        		return statusTools(row);
-		        	}
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(user_status, value);
+                    }
 		        },
 		        {
 		            field: 'updateTime',

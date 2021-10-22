@@ -24,9 +24,9 @@
                             </li>
                             <li>
                                 <label>用户状态：</label>
-                                <select name="STATUS">
-                                    <option value="">所有</option>
-                                    <option value="-1">代码生成请选择字典属性</option>
+                                <select name="STATUS" class="form-control m-b" th:with="type=${@dict.getType('sys_user_status')}">
+                                    <option value="">全部</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                             </li>
                             <li>
@@ -36,6 +36,13 @@
                             <li>
                                 <label>电子邮箱：</label>
                                 <input type="text" name="EMAIL"/>
+                            </li>
+                            <li>
+                                <label>身份类型：</label>
+                                <select name="userType" class="form-control m-b" th:with="type=${@dict.getType('sys_user_type')}">
+                                    <option value="">全部</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
                             </li>
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -60,6 +67,10 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('system:alumni:edit')}]];
         var removeFlag = [[${@permission.hasPermi('system:alumni:remove')}]];
+        var datas = [[${@dict.getType('sys_user_type')}]];
+        var sexs = [[${@dict.getType('sys_user_sex')}]];
+        var user_status = [[${@dict.getType('sys_user_status')}]];
+        var cards = [[${@dict.getType('sys_card_type')}]];
         var prefix = ctx + "system/alumni";
 
         $(function() {
@@ -84,7 +95,11 @@
                 },
                 {
                     field: 'sex',
-                    title: '性别'
+                    title: '性别',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(sexs, value);
+                    }
                 },
                 {
                     field: 'birthday',
@@ -92,7 +107,11 @@
                 },
                 {
                     field: 'usertype',
-                    title: '身份类型'
+                    title: '身份类型',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(datas, value);
+                    }
                 },
                 {
                     field: 'account',
@@ -100,16 +119,23 @@
                 },
                 {
                     field: 'status',
-                    title: '用户状态'
+                    title: '用户状态',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(user_status, value);
+                    }
                 },
-
                 {
                     field: 'idCard',
                     title: '证件号码'
                 },
                 {
                     field: 'cardtype',
-                    title: '证件类型'
+                    title: '证件类型',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(cards, value);
+                    }
                 },
                 {
                     field: 'myPhone',
