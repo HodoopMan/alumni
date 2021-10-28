@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="idCard != null  and idCard != ''"> and ID_CARD = #{idCard}</if>
             <if test="EMAIL != null  and EMAIL != ''"> and EMAIL = #{EMAIL}</if>
             <if test="myPhone != null  and myPhone != ''"> and MY_PHONE = #{myPhone}</if>
-            <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
+            <if test="createTime != null "> and UPDATE_TIME > DATE_SUB(NOW(), INTERVAL 10 MINUTE)</if>
             <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
         </where>
         order by UPDATE_TIME desc

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.alumni.common.utils.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,9 +41,8 @@ public class RyTask
     {
         SysAlumni alumni=  new SysAlumni();
         alumni.setSTATUS("1");
+        alumni.setCreateTime(new Date());
         List<SysAlumni> list = sysAlumniService.selectSysAlumniList(alumni);
-        List<SysUser> noUserlist = new ArrayList();
-        List<SysUser> exUserlist = new ArrayList();
         for(SysAlumni portal :list){
             SysUser user= new SysUser();
             String loginName = portal.getACCOUNT();
@@ -62,15 +62,15 @@ public class RyTask
             user.setStatus("0");
             String userType=portal.getUSERTYPE();
             user.setUserType(userType);
-            if (UserConstants.USER_NAME_NOT_UNIQUE.equals(userService.checkLoginNameUnique(user.getLoginName())))
+            SysUser dbUser= userService.selectUserByLoginName(user.getLoginName());
+            if (dbUser.getLoginName().equals(loginName))
             {
+                user.setUserId(dbUser.getUserId());
                 userService.updateUser(user);
             }else{
                 userService.insertUser(user);
             }
 
         }
-
-
     }
 }

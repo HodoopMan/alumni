@@ -1,11 +1,11 @@
 # 项目相关配置
 ruoyi:
   # 名称
-  name: RuoYi
+  name: alumni
   # 版本
-  version: 4.4.0
+  version: 1.0.0
   # 版权年份
-  copyrightYear: 2019
+  copyrightYear: 2021
   # 实例演示开关
   demoEnabled: true
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
@@ -142,7 +142,7 @@ cas:
   client-name: casClient
   server:
     #    url: http://server.cas.com:8080/cas
-    url: https://tyjnbm.eduincloud.net/cas
+    url: http://weixiaotest.eduincloud.net/cas
   project:
     url: http://weixiaotest.eduincloud.net:8081/portal
 
