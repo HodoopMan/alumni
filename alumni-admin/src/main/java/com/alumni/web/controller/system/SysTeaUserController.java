@@ -1,18 +1,5 @@
 package com.alumni.web.controller.system;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import com.alumni.common.annotation.Log;
 import com.alumni.common.constant.UserConstants;
 import com.alumni.common.core.controller.BaseController;
@@ -27,6 +14,16 @@ import com.alumni.system.domain.SysUser;
 import com.alumni.system.service.ISysPostService;
 import com.alumni.system.service.ISysRoleService;
 import com.alumni.system.service.ISysUserService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 用户信息
@@ -34,10 +31,10 @@ import com.alumni.system.service.ISysUserService;
  * @author ruoyi
  */
 @Controller
-@RequestMapping("/system/user")
-public class SysUserController extends BaseController
+@RequestMapping("/system/teaUser")
+public class SysTeaUserController extends BaseController
 {
-    private String prefix = "system/user";
+    private String prefix = "system/teaUser";
 
     @Autowired
     private ISysUserService userService;
@@ -51,26 +48,26 @@ public class SysUserController extends BaseController
     @Autowired
     private SysPasswordService passwordService;
 
-    @RequiresPermissions("system:user:view")
+    @RequiresPermissions("system:teaUser:view")
     @GetMapping()
     public String user()
     {
-        return prefix + "/user";
+        return prefix + "/teaUser";
     }
 
-    @RequiresPermissions("system:user:list")
+    @RequiresPermissions("system:teaUser:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(SysUser user)
     {
         startPage();
-        user.setSalt("stu");
+        user.setSalt("tea");
         List<SysUser> list = userService.selectUserList(user);
         return getDataTable(list);
     }
 
     @Log(title = "用户管理", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("system:user:export")
+    @RequiresPermissions("system:teaUser:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(SysUser user)
@@ -81,7 +78,7 @@ public class SysUserController extends BaseController
     }
 
     @Log(title = "用户管理", businessType = BusinessType.IMPORT)
-    @RequiresPermissions("system:user:import")
+    @RequiresPermissions("system:teaUser:import")
     @PostMapping("/importData")
     @ResponseBody
     public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception
@@ -93,7 +90,7 @@ public class SysUserController extends BaseController
         return AjaxResult.success(message);
     }
 
-    @RequiresPermissions("system:user:view")
+    @RequiresPermissions("system:teaUser:view")
     @GetMapping("/importTemplate")
     @ResponseBody
     public AjaxResult importTemplate()
@@ -116,7 +113,7 @@ public class SysUserController extends BaseController
     /**
      * 新增保存用户
      */
-    @RequiresPermissions("system:user:add")
+    @RequiresPermissions("system:teaUser:add")
     @Log(title = "用户管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
@@ -156,7 +153,7 @@ public class SysUserController extends BaseController
     /**
      * 修改保存用户
      */
-    @RequiresPermissions("system:user:edit")
+    @RequiresPermissions("system:teaUser:edit")
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
@@ -175,7 +172,7 @@ public class SysUserController extends BaseController
         return toAjax(userService.updateUser(user));
     }
 
-    @RequiresPermissions("system:user:resetPwd")
+    @RequiresPermissions("system:teaUser:resetPwd")
     @GetMapping("/resetPwd/{userId}")
     public String resetPwd(@PathVariable("userId") Long userId, ModelMap mmap)
     {
@@ -183,7 +180,7 @@ public class SysUserController extends BaseController
         return prefix + "/resetPwd";
     }
 
-    @RequiresPermissions("system:user:resetPwd")
+    @RequiresPermissions("system:teaUser:resetPwd")
     @Log(title = "重置密码", businessType = BusinessType.UPDATE)
     @PostMapping("/resetPwd")
     @ResponseBody
@@ -220,7 +217,7 @@ public class SysUserController extends BaseController
     /**
      * 用户授权角色
      */
-    @RequiresPermissions("system:user:add")
+    @RequiresPermissions("system:teaUser:add")
     @Log(title = "用户管理", businessType = BusinessType.GRANT)
     @PostMapping("/authRole/insertAuthRole")
     @ResponseBody
@@ -230,7 +227,7 @@ public class SysUserController extends BaseController
         return success();
     }
 
-    @RequiresPermissions("system:user:remove")
+    @RequiresPermissions("system:teaUser:remove")
     @Log(title = "用户管理", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
@@ -280,7 +277,7 @@ public class SysUserController extends BaseController
      * 用户状态修改
      */
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
-    @RequiresPermissions("system:user:edit")
+    @RequiresPermissions("system:teaUser:edit")
     @PostMapping("/changeStatus")
     @ResponseBody
     public AjaxResult changeStatus(SysUser user)

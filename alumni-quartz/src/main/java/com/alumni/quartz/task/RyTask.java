@@ -40,7 +40,6 @@ public class RyTask
     public void ryNoParams()
     {
         SysAlumni alumni=  new SysAlumni();
-        alumni.setSTATUS("1");
         alumni.setCreateTime(new Date());
         List<SysAlumni> list = sysAlumniService.selectSysAlumniList(alumni);
         for(SysAlumni portal :list){
@@ -63,7 +62,125 @@ public class RyTask
             String userType=portal.getUSERTYPE();
             user.setUserType(userType);
             SysUser dbUser= userService.selectUserByLoginName(user.getLoginName());
-            if (dbUser.getLoginName().equals(loginName))
+            if (dbUser!=null)
+            {
+                user.setUserId(dbUser.getUserId());
+                userService.updateUser(user);
+            }else{
+                userService.insertUser(user);
+            }
+
+        }
+    }
+
+
+    /**
+     * 同步教职工校友用户
+     */
+    public void sysnTeacher()
+    {
+        SysAlumni alumni=  new SysAlumni();
+        alumni.setCreateTime(new Date());
+        List<SysAlumni> list = sysAlumniService.selectSysTeaAlumniList(alumni);
+        for(SysAlumni portal :list){
+            SysUser user= new SysUser();
+            String loginName = portal.getACCOUNT();
+            user.setLoginName(loginName);
+            String userName=portal.getUSERNAME();
+            user.setUserName(userName);
+            String idcard=portal.getIdCard();
+            user.setIdCard(idcard);
+            String email=portal.getEMAIL();
+            user.setEmail(email);
+            String phonenumber=portal.getMyPhone();
+            user.setPhonenumber(phonenumber);
+            String sex=portal.getSEX();
+            user.setSex(sex);
+            String password=portal.getPASSWORD();
+            user.setPassword(password);
+            user.setStatus("0");
+            String userType=portal.getUSERTYPE();
+            user.setUserType(userType);
+            SysUser dbUser= userService.selectUserByLoginName(user.getLoginName());
+            if (dbUser!=null)
+            {
+                user.setUserId(dbUser.getUserId());
+                userService.updateUser(user);
+            }else{
+                userService.insertUser(user);
+            }
+
+        }
+    }
+
+    /**
+     * 同步附属单位职工校友用户
+     */
+    public void sysnDocter()
+    {
+        SysAlumni alumni=  new SysAlumni();
+        alumni.setCreateTime(new Date());
+        List<SysAlumni> list = sysAlumniService.selectSysAlumniList(alumni);
+        for(SysAlumni portal :list){
+            SysUser user= new SysUser();
+            String loginName = portal.getACCOUNT();
+            user.setLoginName(loginName);
+            String userName=portal.getUSERNAME();
+            user.setUserName(userName);
+            String idcard=portal.getIdCard();
+            user.setIdCard(idcard);
+            String email=portal.getEMAIL();
+            user.setEmail(email);
+            String phonenumber=portal.getMyPhone();
+            user.setPhonenumber(phonenumber);
+            String sex=portal.getSEX();
+            user.setSex(sex);
+            String password=portal.getPASSWORD();
+            user.setPassword(password);
+            user.setStatus("0");
+            String userType=portal.getUSERTYPE();
+            user.setUserType(userType);
+            SysUser dbUser= userService.selectUserByLoginName(user.getLoginName());
+            if (dbUser!=null)
+            {
+                user.setUserId(dbUser.getUserId());
+                userService.updateUser(user);
+            }else{
+                userService.insertUser(user);
+            }
+
+        }
+    }
+
+    /**
+     * 同步学生校友用户
+     */
+    public void sysnStudent()
+    {
+        SysAlumni alumni=  new SysAlumni();
+        alumni.setCreateTime(new Date());
+        List<SysAlumni> list = sysAlumniService.selectSysAlumniList(alumni);
+        for(SysAlumni portal :list){
+            SysUser user= new SysUser();
+            String loginName = portal.getACCOUNT();
+            user.setLoginName(loginName);
+            String userName=portal.getUSERNAME();
+            user.setUserName(userName);
+            String idcard=portal.getIdCard();
+            user.setIdCard(idcard);
+            String email=portal.getEMAIL();
+            user.setEmail(email);
+            String phonenumber=portal.getMyPhone();
+            user.setPhonenumber(phonenumber);
+            String sex=portal.getSEX();
+            user.setSex(sex);
+            String password=portal.getPASSWORD();
+            user.setPassword(password);
+            user.setStatus("0");
+            String userType=portal.getUSERTYPE();
+            user.setUserType(userType);
+            SysUser dbUser= userService.selectUserByLoginName(user.getLoginName());
+            if (dbUser!=null)
             {
                 user.setUserId(dbUser.getUserId());
                 userService.updateUser(user);

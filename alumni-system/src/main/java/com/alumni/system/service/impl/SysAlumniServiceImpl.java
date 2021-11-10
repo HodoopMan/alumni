@@ -50,6 +50,46 @@ public class SysAlumniServiceImpl implements ISysAlumniService
     }
 
     /**
+     * 查询【附属单位职工】列表
+     *
+     * @param sysAlumni 【附属单位职工】
+     * @return 【附属单位职工】
+     */
+    @Override
+    @DataSource(value = DataSourceType.SLAVE)
+    public List<SysAlumni> selectSysHpAlumniList(SysAlumni sysAlumni)
+    {
+        return sysAlumniMapper.selectSysStuAlumniList(sysAlumni);
+    }
+
+    /**
+     * 查询【学生】列表
+     *
+     * @param sysAlumni 【学生】
+     * @return 【学生】
+     */
+    @Override
+    @DataSource(value = DataSourceType.SLAVE)
+    public List<SysAlumni> selectSysStuAlumniList(SysAlumni sysAlumni)
+    {
+        return sysAlumniMapper.selectSysStuAlumniList(sysAlumni);
+    }
+
+
+    /**
+     * 查询【教职工】列表
+     *
+     * @param sysAlumni 【教职工】
+     * @return 【教职工】
+     */
+    @Override
+    @DataSource(value = DataSourceType.SLAVE)
+    public List<SysAlumni> selectSysTeaAlumniList(SysAlumni sysAlumni)
+    {
+        return sysAlumniMapper.selectSysTeaAlumniList(sysAlumni);
+    }
+
+    /**
      * 新增【请填写功能名称】
      *
      * @param sysAlumni 【请填写功能名称】

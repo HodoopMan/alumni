@@ -20,7 +20,7 @@
 								</li>
 								<li>
 									<label>校友类型：</label>
-									<select name="userType" style="width: 120px" class="form-control m-b" th:with="type=${@dict.getType('sys_user_type')}">
+									<select name="userType" style="width: 120px" class="form-control m-b" th:with="type=${@dict.getType('sys_hpUser_type')}">
 										<option value="">全部</option>
 										<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 									</select>
@@ -47,13 +47,13 @@
 				</div>
 
 		        <div class="btn-group-sm" id="toolbar" role="group">
-		        	<a class="btn btn-success" onclick="$.operate.addTab()" shiro:hasPermission="system:user:add">
+		        	<a class="btn btn-success" onclick="$.operate.addTab()" shiro:hasPermission="system:hpUser:add">
 		                <i class="fa fa-plus"></i> 新增
 		            </a>
-		            <a class="btn btn-info" onclick="$.table.importExcel()" shiro:hasPermission="system:user:import">
+		            <a class="btn btn-info" onclick="$.table.importExcel()" shiro:hasPermission="system:hpUser:import">
 			            <i class="fa fa-upload"></i> 导入
 			        </a>
-		            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:user:export">
+		            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:hpUser:export">
 			            <i class="fa fa-download"></i> 导出
 			        </a>
 		        </div>
@@ -69,12 +69,12 @@
 	<th:block th:include="include :: layout-latest-js" />
 	<th:block th:include="include :: ztree-js" />
 	<script th:inline="javascript">
-		var editFlag = [[${@permission.hasPermi('system:user:edit')}]];
+		var editFlag = [[${@permission.hasPermi('system:hpUser:edit')}]];
         var user_status = [[${@dict.getType('sys_account_status')}]];
-        var datas = [[${@dict.getType('sys_user_type')}]];
-		var resetPwdFlag = [[${@permission.hasPermi('system:user:resetPwd')}]];
+        var datas = [[${@dict.getType('sys_hpUser_type')}]];
+		var resetPwdFlag = [[${@permission.hasPermi('system:hpUser:resetPwd')}]];
         var sexs = [[${@dict.getType('sys_user_sex')}]];
-		var prefix = ctx + "system/user";
+		var prefix = ctx + "system/hpUser";
 
 		$(function() {
 		    var panehHidden = false;
@@ -157,7 +157,7 @@
 		            formatter: function(value, row, index) {
 		                var actions = [];
 		                actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.editTab(\'' + row.userId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
-                        actions.push("<a class='btn btn-danger btn-xs " + resetPwdFlag + "' href='javascript:void(0)' onclick='resetPwd(" + row.userId + ")'><i class='fa fa-key'></i>密码</a> ");
+                        actions.push("<a class='btn btn-danger btn-xs " + resetPwdFlag + "' href='javascript:void(0)' onclick='resetPwd(" + row.userId + ")'><i class='fa fa-key'></i>密码</a>");
 		                return actions.join('');
 		            }
 		        }]

@@ -39,8 +39,71 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="idCard != null  and idCard != ''"> and ID_CARD = #{idCard}</if>
             <if test="EMAIL != null  and EMAIL != ''"> and EMAIL = #{EMAIL}</if>
             <if test="myPhone != null  and myPhone != ''"> and MY_PHONE = #{myPhone}</if>
-            <if test="createTime != null "> and UPDATE_TIME > DATE_SUB(NOW(), INTERVAL 10 MINUTE)</if>
+
             <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
+            <if test="createTime != null "> and USERTYPE in ('10','20','30','31','40','60','70','90')</if>
+        </where>
+        order by UPDATE_TIME desc
+    </select>
+
+    <select id="selectSysTeaAlumniList" parameterType="SysAlumni" resultMap="SysAlumniResult">
+        <include refid="selectSysAlumniVo"/>
+        <where>
+            <if test="USERNAME != null  and USERNAME != ''"> and USERNAME like concat('%', #{USERNAME}, '%')</if>
+            <if test="ACCOUNT != null  and ACCOUNT != ''"> and ACCOUNT = #{ACCOUNT}</if>
+            <if test="PASSWORD != null  and PASSWORD != ''"> and PASSWORD = #{PASSWORD}</if>
+            <if test="CARDTYPE != null  and CARDTYPE != ''"> and CARDTYPE = #{CARDTYPE}</if>
+            <if test="SEX != null  and SEX != ''"> and SEX = #{SEX}</if>
+            <if test="BIRTHDAY != null  and BIRTHDAY != ''"> and BIRTHDAY = #{BIRTHDAY}</if>
+            <if test="USERTYPE != null  and USERTYPE != ''"> and USERTYPE = #{USERTYPE}</if>
+            <if test="STATUS != null  and STATUS != ''"> and STATUS = #{STATUS}</if>
+            <if test="idCard != null  and idCard != ''"> and ID_CARD = #{idCard}</if>
+            <if test="EMAIL != null  and EMAIL != ''"> and EMAIL = #{EMAIL}</if>
+            <if test="myPhone != null  and myPhone != ''"> and MY_PHONE = #{myPhone}</if>
+            <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
+            <if test="createTime != null "> and USERTYPE in ('10','60','70','90') and length(USERNAME)&lt;9</if>
+        </where>
+        order by UPDATE_TIME desc
+    </select>
+
+    <select id="selectSysHpAlumniList" parameterType="SysAlumni" resultMap="SysAlumniResult">
+        <include refid="selectSysAlumniVo"/>
+        <where>
+            <if test="USERNAME != null  and USERNAME != ''"> and USERNAME like concat('%', #{USERNAME}, '%')</if>
+            <if test="ACCOUNT != null  and ACCOUNT != ''"> and ACCOUNT = #{ACCOUNT}</if>
+            <if test="PASSWORD != null  and PASSWORD != ''"> and PASSWORD = #{PASSWORD}</if>
+            <if test="CARDTYPE != null  and CARDTYPE != ''"> and CARDTYPE = #{CARDTYPE}</if>
+            <if test="SEX != null  and SEX != ''"> and SEX = #{SEX}</if>
+            <if test="BIRTHDAY != null  and BIRTHDAY != ''"> and BIRTHDAY = #{BIRTHDAY}</if>
+            <if test="USERTYPE != null  and USERTYPE != ''"> and USERTYPE = #{USERTYPE}</if>
+            <if test="STATUS != null  and STATUS != ''"> and STATUS = #{STATUS}</if>
+            <if test="idCard != null  and idCard != ''"> and ID_CARD = #{idCard}</if>
+            <if test="EMAIL != null  and EMAIL != ''"> and EMAIL = #{EMAIL}</if>
+            <if test="myPhone != null  and myPhone != ''"> and MY_PHONE = #{myPhone}</if>
+
+            <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
+            <if test="createTime != null "> and USERTYPE in ('40')</if>
+        </where>
+        order by UPDATE_TIME desc
+    </select>
+
+    <select id="selectSysStuAlumniList" parameterType="SysAlumni" resultMap="SysAlumniResult">
+        <include refid="selectSysAlumniVo"/>
+        <where>
+            <if test="USERNAME != null  and USERNAME != ''"> and USERNAME like concat('%', #{USERNAME}, '%')</if>
+            <if test="ACCOUNT != null  and ACCOUNT != ''"> and ACCOUNT = #{ACCOUNT}</if>
+            <if test="PASSWORD != null  and PASSWORD != ''"> and PASSWORD = #{PASSWORD}</if>
+            <if test="CARDTYPE != null  and CARDTYPE != ''"> and CARDTYPE = #{CARDTYPE}</if>
+            <if test="SEX != null  and SEX != ''"> and SEX = #{SEX}</if>
+            <if test="BIRTHDAY != null  and BIRTHDAY != ''"> and BIRTHDAY = #{BIRTHDAY}</if>
+            <if test="USERTYPE != null  and USERTYPE != ''"> and USERTYPE = #{USERTYPE}</if>
+            <if test="STATUS != null  and STATUS != ''"> and STATUS = #{STATUS}</if>
+            <if test="idCard != null  and idCard != ''"> and ID_CARD = #{idCard}</if>
+            <if test="EMAIL != null  and EMAIL != ''"> and EMAIL = #{EMAIL}</if>
+            <if test="myPhone != null  and myPhone != ''"> and MY_PHONE = #{myPhone}</if>
+
+            <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
+            <if test="createTime != null "> and USERTYPE in ('20','30','31','70') and length(USERNAME)&gt;9</if>
         </where>
         order by UPDATE_TIME desc
     </select>

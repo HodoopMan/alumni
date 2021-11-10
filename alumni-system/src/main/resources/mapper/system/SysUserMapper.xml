@@ -70,6 +70,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="status != null and status != ''">
 			AND u.status = #{status}
 		</if>
+		<if test="salt != null and salt != ''">
+			<if test="salt=='stu'">
+				AND u.user_type in('20','30','31','70') and length(u.login_name)&gt;9
+			</if>
+			<if test="salt=='hp'">
+				AND u.user_type in('40')
+			</if>
+			<if test="salt=='tea'">
+				AND u.user_type in('10','60','90','70')and length(u.login_name)&lt;9
+			</if>
+		</if>
 		<if test="userType != null and userType != ''">
 			AND u.user_type = #{userType}
 		  </if>
